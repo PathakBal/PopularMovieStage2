@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PopularMovies</string>
+    <string name="ByPopularity">most popular</string>
+    <string name="ByVoting">highest rated</string>
+    <string name="ByFav">my favorites</string>
+    <string name="ErrorMsg">No Network Avialble</string>
+    <string name="movie_detail">MovieDetails</string>
+</resources>
