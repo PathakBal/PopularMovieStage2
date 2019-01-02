@@ -15,10 +15,10 @@ public interface MovieDetailDao {
     @Query("SELECT * FROM moviedetails")
     LiveData<List<MovieDetailEntry>> loadAllMovieDetails();
 
-    @Insert (onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertMovieDetails(MovieDetailEntry movieDetailEntry);
 
-    @Query ("DELETE  FROM moviedetails where movieId = :id")
+    @Query("DELETE  FROM moviedetails where movieId = :id")
     void deleteMovieDetails(String id);
 
     @Query("SELECT movieId FROM moviedetails where movieId = :id")

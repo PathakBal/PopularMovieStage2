@@ -5,4 +5,6 @@
     <string name="ByFav">my favorites</string>
     <string name="ErrorMsg">No Network Avialble</string>
     <string name="movie_detail">MovieDetails</string>
+    <string name="ReviewTextLabel">Reviews</string>
+    <string name="TrailerTextLabel">Trailers</string>
 </resources>

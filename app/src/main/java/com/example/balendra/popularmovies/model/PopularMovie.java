@@ -29,18 +29,19 @@ public class PopularMovie implements Parcelable {
         return voteAverage;
     }
 
-    public PopularMovie(String extractedPosterPath){
+    public PopularMovie(String extractedPosterPath) {
 
         this.posterPath = posterPath;
 
     }
-    public PopularMovie(String extractedPosterPath, String extractedTitle, String extractedOverview, String extractedReleaseDate, String extractedVote,String movieId) {
+
+    public PopularMovie(String extractedPosterPath, String extractedTitle, String extractedOverview, String extractedReleaseDate, String extractedVote, String movieId) {
         this.posterPath = extractedPosterPath;
-        this.overView=extractedOverview;
-        this.title=extractedTitle;
-        this.releaseDate=extractedReleaseDate;
-        this.voteAverage=extractedVote;
-        this.id= movieId;
+        this.overView = extractedOverview;
+        this.title = extractedTitle;
+        this.releaseDate = extractedReleaseDate;
+        this.voteAverage = extractedVote;
+        this.id = movieId;
     }
 
     private PopularMovie(Parcel parcel) {
@@ -79,7 +80,9 @@ public class PopularMovie implements Parcelable {
         return title;
     }
 
-    public String getId() { return  id;}
+    public String getId() {
+        return id;
+    }
 
     public String getPosterPath() {
         return posterPath;
@@ -100,6 +103,7 @@ public class PopularMovie implements Parcelable {
         dest.writeString(id);
 
     }
+
     public static final Parcelable.Creator<PopularMovie> CREATOR = new Parcelable.Creator<PopularMovie>() {
 
         @Override

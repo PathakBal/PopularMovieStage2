@@ -39,7 +39,8 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
     MovieAdapter imageAdapter;
     List<PopularMovie> movieInfo;
-    @BindView(R.id.gridView) GridView gridview;
+    @BindView(R.id.gridView)
+    GridView gridview;
     private static final String KEY_MOVIE_LIST = "MOVIE_LIST";
     boolean isByVotedClicked = false;
     TextView errorTextView;
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             imageAdapter.notifyDataSetInvalidated();
             gridview.invalidateViews();
             new DownLoadMovieInfo().execute(Constant.SORT_BY_VOTE);
-        } else if(menuItemSelected == R.id.byPopularity) {
+        } else if (menuItemSelected == R.id.byPopularity) {
             if (isByVotedClicked) {
                 Toast.makeText(MainActivity.this, "Clicked on By Voted " + Constant.SORT_BY_POPULARITY, Toast.LENGTH_LONG).show();
                 imageAdapter.clearAll();
@@ -104,10 +105,9 @@ public class MainActivity extends AppCompatActivity {
                 gridview.invalidateViews();
                 new DownLoadMovieInfo().execute(Constant.SORT_BY_POPULARITY);
             }
-        }
-        else {
+        } else {
             isByVotedClicked = true;
-            Toast.makeText(MainActivity.this, "Clicked on By Favorites" , Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "Clicked on By Favorites", Toast.LENGTH_LONG).show();
             imageAdapter.clearAll();
             imageAdapter.notifyDataSetInvalidated();
             gridview.invalidateViews();
@@ -163,14 +163,14 @@ public class MainActivity extends AppCompatActivity {
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
-    public void getPopularMovieFromDb(){
+    public void getPopularMovieFromDb() {
         movieInfo = new ArrayList<>();
         LiveData<List<MovieDetailEntry>> movies = mdb.movieDetailDao().loadAllMovieDetails();
         movies.observe(this, new Observer<List<MovieDetailEntry>>() {
             @Override
             public void onChanged(@Nullable List<MovieDetailEntry> movieDetailEntries) {
-                for (MovieDetailEntry entry: movieDetailEntries) {
-                    movieInfo.add(new PopularMovie(entry.getPosterImage(),null,null,null,null,entry.getMovieId()));
+                for (MovieDetailEntry entry : movieDetailEntries) {
+                    movieInfo.add(new PopularMovie(entry.getPosterImage(), null, null, null, null, entry.getMovieId()));
                 }
                 imageAdapter.setMovie(movieInfo);
             }

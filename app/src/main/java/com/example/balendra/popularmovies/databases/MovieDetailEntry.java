@@ -18,6 +18,7 @@ public class MovieDetailEntry {
         this.movieId = movieId;
         this.posterImage = posterImage;
     }
+
     @Ignore
     public MovieDetailEntry(String movieId, String posterImage, String movieName) {
         this.movieId = movieId;

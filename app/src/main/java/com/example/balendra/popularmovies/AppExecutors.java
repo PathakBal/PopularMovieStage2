@@ -22,21 +22,28 @@ public class AppExecutors {
         this.mainThread = mainThread;
     }
 
-    public static AppExecutors getsInstance(Context context){
+    public static AppExecutors getsInstance(Context context) {
 
-        if(sInstance == null){
-            synchronized (LOCK){
-                sInstance = new AppExecutors(Executors.newSingleThreadExecutor(),Executors.newFixedThreadPool(3),new MainThreadExecutor());
+        if (sInstance == null) {
+            synchronized (LOCK) {
+                sInstance = new AppExecutors(Executors.newSingleThreadExecutor(), Executors.newFixedThreadPool(3), new MainThreadExecutor());
             }
         }
-
         return sInstance;
-
     }
 
-    public Executor diskIO(){ return diskIO; }
-    public Executor mainThread() { return mainThread;}
-    public Executor NetworkIO() { return networkIO;}
+    public Executor diskIO() {
+        return diskIO;
+    }
+
+    public Executor mainThread() {
+        return mainThread;
+    }
+
+    public Executor NetworkIO() {
+        return networkIO;
+    }
+
     private static class MainThreadExecutor implements Executor {
         private Handler mainThreadhandler = new Handler(Looper.getMainLooper());
         @Override

@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7"
-        android:orientation="horizontal">
+        android:layout_weight="15"
+        android:orientation="horizontal"
+        android:layout_marginTop="4dp">
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2">
+
             <ImageView
                 android:id="@+id/posterImageView"
                 android:layout_width="match_parent"
@@ -20,8 +31,7 @@
                 android:adjustViewBounds="true"
                 android:padding="4dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background"
-                />
+                android:src="@drawable/ic_launcher_background" />
 
         </LinearLayout>
 
@@ -36,37 +46,37 @@
                 android:id="@+id/titleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:text="Title"
                 android:layout_weight="1"
+                android:text="Title"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/ratingTextView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:text="High Rating"
                 android:layout_weight="1"
+                android:text="High Rating"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/releaseDateTextView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_weight="1"
                 android:text="today only"
                 android:textSize="20sp"
-                android:layout_weight="1"
                 android:textStyle="italic" />
 
             <ImageButton
                 android:id="@+id/favorite_button"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@android:drawable/btn_star"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:background="@android:color/transparent"/>
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:src="@android:drawable/btn_star" />
 
         </LinearLayout>
 
@@ -75,17 +85,77 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5">
+        android:layout_weight="5"
+        android:id="@+id/container">
 
         <TextView
             android:id="@+id/overviewTextView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:padding="4dp"
             android:textSize="15sp"
             android:autoSizeTextType="uniform"
             android:text="Here is description.........." />
 
+
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Trailers"
+        android:textSize="@dimen/TrailerTextSize"
+        android:layout_marginLeft="@dimen/MarginLeft"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/movieTrailers"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reviews"
+        android:textStyle="bold"
+        android:textSize="@dimen/ReviewTextSize"
+        android:layout_marginLeft="@dimen/MarginLeft"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/movieReviews"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager">
+
+        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
 </LinearLayout>
+</ScrollView>

@@ -1,8 +1,8 @@
 package com.example.balendra.popularmovies.utils;
 
-import android.graphics.Movie;
 import android.util.Log;
 
+import com.example.balendra.popularmovies.model.MovieReview;
 import com.example.balendra.popularmovies.model.MovieTrailer;
 import com.example.balendra.popularmovies.model.PopularMovie;
 
@@ -24,6 +24,8 @@ public class JsonUtils {
     private static  String JSON_KEY_ID="id";
     private static String JSON_KEY = "key";
     private static String JSON_NAME = "name";
+    private static String JSON_KEY_AUTHOR = "author";
+    private static String JSON_KEY_URL = "url";
 
     static JSONObject jsonObject;
     static JSONArray jsonArrayResult;
@@ -34,6 +36,31 @@ public class JsonUtils {
 
     static List<PopularMovie> movieList;
     static  List<MovieTrailer> movieTrailers;
+    static List<MovieReview> movieReviews;
+
+
+    public static List<MovieReview> parseMovieReviews(String movieReviewsJson){
+
+        movieReviews = new ArrayList<>();
+
+        try {
+            jsonObject = new JSONObject(movieReviewsJson);
+            jsonArrayResult = jsonObject.getJSONArray(JSON_KEY_RESULT);
+            Log.d("Balendra"," Size is for review : "+jsonArrayResult.length());
+            for (int i=0;i<jsonArrayResult.length();i++) {
+                JSONObject objectfromArray = jsonArrayResult.getJSONObject(i);
+                String extractedReviewUrl = objectfromArray.getString(JSON_KEY_URL);
+                String extractedREviewname = objectfromArray.getString(JSON_KEY_AUTHOR);
+                movieReviews.add(new MovieReview(extractedREviewname,extractedReviewUrl));
+            }
+        } catch (JSONException e) {
+            Log.d("Balendra","From JSON parsing"+e.toString());
+            e.printStackTrace();
+
+        }
+        Log.d("Balendra"," Size is for Review : "+movieReviews.size());
+        return movieReviews;
+    }
 
     public static List<MovieTrailer> parseMovieTrailers(String movieTrailersJson){
 

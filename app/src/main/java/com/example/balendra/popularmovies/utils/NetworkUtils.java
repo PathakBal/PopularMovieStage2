@@ -51,20 +51,16 @@ public class NetworkUtils {
     }
 
 
-    public static URL buildURLForReviewAndTrailers(String path,String id) {
+    public static URL buildURLForReviewAndTrailers(String id) {
         Log.d("Balendra","Inside to buildURLForReviewAndTrailers contains");
         Uri builtUri = null;
-        if (path.contains("reviews")) {
+
             builtUri = Uri.parse(HOST_NAME).buildUpon()
-                    .appendEncodedPath(ViDEO_INFO+id+"/"+path)
+                    .appendEncodedPath(ViDEO_INFO+id)
+                    .appendEncodedPath("videos")
                     .appendQueryParameter("api_key", Constant.API_KEY)
                     .build();
-        } else {
-            builtUri = Uri.parse(HOST_NAME).buildUpon()
-                    .appendEncodedPath(ViDEO_INFO+id+"/"+path)
-                    .appendQueryParameter("api_key", Constant.API_KEY)
-                    .build();
-        }
+
         URL url = null;
         try {
             url = new URL(builtUri.toString());
@@ -72,6 +68,27 @@ public class NetworkUtils {
             e.printStackTrace();
         }
         Log.d("Balendra","Inside to buildURLForReviewAndTrailers "+url.toString());
+        return url;
+    }
+
+
+    public static URL buildURLForReview(String id) {
+        Log.d("Balendra","Inside to buildURLForReview contains");
+        Uri builtUri = null;
+
+        builtUri = Uri.parse(HOST_NAME).buildUpon()
+                .appendEncodedPath(ViDEO_INFO+id)
+                .appendEncodedPath("reviews")
+                .appendQueryParameter("api_key", Constant.API_KEY)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        Log.d("Balendra","Inside to buildURLForReview "+url.toString());
         return url;
     }
 
