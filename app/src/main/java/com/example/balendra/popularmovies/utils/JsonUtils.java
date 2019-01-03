@@ -13,7 +13,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JsonUtils {
+public final class JsonUtils {
 
     private static String JSON_KEY_POSTER_PATH="poster_path";
     private static String JSON_KEY_TITLE="title";

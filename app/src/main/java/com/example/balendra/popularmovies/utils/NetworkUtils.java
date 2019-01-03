@@ -24,6 +24,7 @@ public class NetworkUtils {
     public static String TOP_VOTED_PATH = "3/movie/top_rated";
     public static String ViDEO_INFO = "3/movie/";
 
+    private NetworkUtils() {}
 
     public static URL buildURL(String sortBy) {
 
