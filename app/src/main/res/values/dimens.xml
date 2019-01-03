@@ -3,4 +3,6 @@
     <dimen name="ReviewTextSize">20sp</dimen>
     <dimen name="TrailerTextSize">20sp</dimen>
     <dimen name="MarginLeft">4dp</dimen>
+    <dimen name="gutterSpaceHalf">8dp</dimen>
+    <dimen name="gutterSpace">16dp</dimen>
 </resources>

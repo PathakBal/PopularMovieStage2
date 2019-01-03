@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String KEY_MOVIE_LIST = "MOVIE_LIST";
     boolean isByVotedClicked = false;
     TextView errorTextView;
-    // AppDataBase mdb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
             movieInfo = savedInstanceState.getParcelableArrayList(KEY_MOVIE_LIST);
         }
         imageAdapter = new MovieAdapter(this, movieInfo);
-        // gridview = (GridView) findViewById(R.id.gridView);
         ButterKnife.bind(this);
         gridview.setAdapter(imageAdapter);
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -78,7 +76,10 @@ public class MainActivity extends AppCompatActivity {
             noNetworkInfoMsg();
             gridview.setVisibility(View.INVISIBLE);
         }
-        // mdb = AppDataBase.getsInstance(getApplicationContext());
+//        if(isFavSelected) {
+//            removeGridViewItems();
+//            getPopularMovieFromDb();
+//        }
     }
 
     @Override
@@ -92,28 +93,32 @@ public class MainActivity extends AppCompatActivity {
         int menuItemSelected = item.getItemId();
         if (menuItemSelected == R.id.byVoted) {
             isByVotedClicked = true;
-            Toast.makeText(MainActivity.this, "Clicked on By Voted " + Constant.SORT_BY_VOTE, Toast.LENGTH_LONG).show();
-            imageAdapter.clearAll();
-            imageAdapter.notifyDataSetInvalidated();
-            gridview.invalidateViews();
+            showToastMessage("Click By Voted");
+            removeGridViewItems();
             new DownLoadMovieInfo().execute(Constant.SORT_BY_VOTE);
         } else if (menuItemSelected == R.id.byPopularity) {
             if (isByVotedClicked) {
-                Toast.makeText(MainActivity.this, "Clicked on By Voted " + Constant.SORT_BY_POPULARITY, Toast.LENGTH_LONG).show();
-                imageAdapter.clearAll();
-                imageAdapter.notifyDataSetInvalidated();
-                gridview.invalidateViews();
+                showToastMessage("Click by Popularity");
+                removeGridViewItems();
                 new DownLoadMovieInfo().execute(Constant.SORT_BY_POPULARITY);
             }
         } else {
             isByVotedClicked = true;
-            Toast.makeText(MainActivity.this, "Clicked on By Favorites", Toast.LENGTH_LONG).show();
-            imageAdapter.clearAll();
-            imageAdapter.notifyDataSetInvalidated();
-            gridview.invalidateViews();
+            showToastMessage("Clicked on By Favorites");
+            removeGridViewItems();
             getPopularMovieFromDb();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showToastMessage(String msg) {
+        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
+    }
+
+    private void removeGridViewItems() {
+        imageAdapter.clearAll();
+        imageAdapter.notifyDataSetInvalidated();
+        gridview.invalidateViews();
     }
 
     @Override
@@ -127,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected List<PopularMovie> doInBackground(String... string) {
             String results = null;
-            List<PopularMovie> result = null;
+            List<PopularMovie> result = new ArrayList<>();
             URL url = NetworkUtils.buildURL(string[0]);
             try {
                 results = NetworkUtils.getResponseFromHttpUrl(url);
@@ -170,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable List<MovieDetailEntry> movieDetailEntries) {
                 movieInfo = new ArrayList<>();
+                removeGridViewItems();
                 for (MovieDetailEntry entry : movieDetailEntries) {
                     movieInfo.add(new PopularMovie(entry.getPosterImage(), null, null, null, null, entry.getMovieId()));
                 }

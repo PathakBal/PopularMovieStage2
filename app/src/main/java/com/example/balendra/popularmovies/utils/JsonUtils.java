@@ -30,6 +30,8 @@ public final class JsonUtils {
     static JSONObject jsonObject;
     static JSONArray jsonArrayResult;
 
+    private JsonUtils() { }
+
     public static List<PopularMovie> getMovieList() {
         return movieList;
     }
@@ -95,7 +97,7 @@ public final class JsonUtils {
             Log.d("Balendra"," Size is: "+jsonArrayResult.length());
             for (int i=0;i<jsonArrayResult.length();i++) {
                 JSONObject objectfromArray = jsonArrayResult.getJSONObject(i);
-                String extractedPosterPath = objectfromArray.getString(JSON_KEY_POSTER_PATH);
+                String extractedPosterPath = objectfromArray.optString(JSON_KEY_POSTER_PATH);
                 String extractedTitle = objectfromArray.getString(JSON_KEY_TITLE);
                 String extractedReleaseDate = objectfromArray.getString(JSON_KEY_RELEASE_DATE);
                 String extractedVote = objectfromArray.getString(JSON_KEY_VOTE_AVERAGE);
